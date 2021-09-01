@@ -69,16 +69,16 @@ export const asyncRoutes = [
         meta: {
           title: '个人中心',
           keepAlive: true,
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
     path: '/project',
     component: Layout,
     redirect: 'noRedirect',
     name: 'project',
-    meta: {title: '系统管理', icon: 'users-cog'},
+    meta: { title: '系统管理', icon: 'users-cog' },
     children: [
       {
         path: 'user',
@@ -87,7 +87,7 @@ export const asyncRoutes = [
         meta: {
           title: '用户管理',
           keepAlive: true,
-        }
+        },
       },
       {
         path: 'role',
@@ -96,15 +96,16 @@ export const asyncRoutes = [
         meta: {
           title: '角色管理',
           keepAlive: true,
-        }
-      }, {
+        },
+      },
+      {
         path: 'operation',
         name: 'operation',
         component: () => import('@/views/project/operation/index'),
         meta: {
           title: '操作日志',
           keepAlive: true,
-        }
+        },
       },
       /*{
         path: 'system',
@@ -113,22 +114,48 @@ export const asyncRoutes = [
         meta: {
           title: '设置'
         }
-      },*/{
+      },*/ {
         path: 'department',
         name: 'department',
         component: () => import('@/views/project/department/index'),
         meta: {
-          title: '部门管理'
-        }
-      },{
+          title: '部门管理',
+        },
+      },
+      {
         path: 'menu',
         name: 'menu',
         component: () => import('@/views/project/menu/index'),
         meta: {
-          title: '菜单管理'
-        }
-      }
-    ]
+          title: '菜单管理',
+        },
+      },
+    ],
+  },
+  {
+    path: '/vuecomponents',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'project',
+    meta: { title: '组件', icon: 'users-cog' },
+    children: [
+      {
+        path: 'echarts',
+        name: 'echarts',
+        component: () => import('@/views/vuecomponents/echarts/index'),
+        meta: {
+          title: 'echarts',
+        },
+      },
+      {
+        path: 'JS',
+        name: 'TS',
+        component: () => import('@/views/vuecomponents/echarts/index2'),
+        meta: {
+          title: 'TS',
+        },
+      },
+    ],
   },
   {
     path: '*',

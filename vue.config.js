@@ -15,7 +15,7 @@ const {
   providePlugin,
   build7z,
   donation,
-  baseURL
+  baseURL,
 } = require('./src/config')
 const { webpackBarName, webpackBanner, donationConsole } = require('zx-layouts')
 
@@ -29,7 +29,7 @@ const date = dayjs().format('YYYY_M_D')
 const time = dayjs().format('YYYY-M-D HH:mm:ss')
 const productionGzipExtensions = ['html', 'js', 'css', 'svg']
 process.env.VUE_APP_TITLE = title || ''
-process.env.VUE_APP_AUTHOR = author || '湖南顶壹出品'
+process.env.VUE_APP_AUTHOR = author || '----出品'
 process.env.VUE_APP_UPDATE_TIME = time
 process.env.VUE_APP_VERSION = version
 
@@ -71,16 +71,35 @@ module.exports = {
   configureWebpack() {
     return {
       resolve: {
+        extensions: ['.ts', '.tsx', '.js'],
         alias: {
           '@': resolve('src'),
         },
+
+        // extentsions: ['.ts', '.tsx', '.js', '.json'],
       },
-      plugins: [
-        new Webpack.ProvidePlugin(providePlugin),
-        new WebpackBar({
-          name: webpackBarName,
-        }),
-      ],
+      module: {
+        rules: [
+          {
+            test: /\.tsx?$/,
+            loader: 'ts-loader',
+            exclude: /node_modules|\.d\.ts$/,
+            options: {
+              appendTsSuffixTo: [/\.vue$/],
+            },
+          },
+          {
+            test: /\.d\.ts$/,
+            loader: 'ignore-loader',
+          },
+        ],
+      },
+      // plugins: [
+      //   new Webpack.ProvidePlugin(providePlugin),
+      //   new WebpackBar({
+      //     name: webpackBarName,
+      //   }),
+      // ],
     }
   },
   chainWebpack(config) {
